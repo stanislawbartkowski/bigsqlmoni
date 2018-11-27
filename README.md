@@ -70,3 +70,6 @@ Modify moni.rc file if necessary
 | TOAVG | The end of reference average period | "2018-08-09"
 | LIMIT | |
 | THRESH | |
+
+# Schema creation
+
