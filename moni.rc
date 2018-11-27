@@ -6,17 +6,9 @@ BIGSQLDB=bigsql
 
 DICTTXT=dict.txt
 
-#DICTABLE=HEALTHCK.dictable
-#TTABLE=HEALTHCK.ttable
-#VTABLE=HEALTHCK.vtable
-#VVIEW=HEALTHCK.vmetrics
-#MODULE=HEALTHCK.moni
-#VSUMVIEW=HEALTHCK.vsummetrics
-
-
 DICTABLE=MONIT.dictable
 TTABLE=MONIT.ttable
-VTABLE=MONIT.vtable
+VTABLE=MONIT.mtable
 VVIEW=MONIT.vmetrics
 MODULE=MONIT.moni
 VSUMVIEW=MONIT.vsummetrics
@@ -27,8 +19,3 @@ LIMIT=5
 TRESH=3
 #TRESH=9999
 
-#DICTABLE=mon.dictable
-#TTABLE=mon.ttable
-#VTABLE=mon.vtable
-#VVIEW=mon.vmetrics
-#MODULE=mon.moni
