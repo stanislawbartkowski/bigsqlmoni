@@ -12,4 +12,19 @@ internals. For instance: assuming the EXT_TABLE_RECV_WAIT_TIME brings 11630, wha
 Instead of pure numbers, much more valuable is observing the trends and provided that the metrics is growing or lowering, try to make 
 some conclusion out of it.
 
+##TODO
+
+## Schema description
+
+##TODO
+
+## File description
+
+| File        | Description
+| ------------- |:-------------:|
+| createdicttable.sql | Template to create dictionary table, metrics description |
+| createmoni.sql | Template to create moni module containing stored procedures |
+| createmonitables.sql | Tamplate to create header and detail tables |
+| 
+
 
