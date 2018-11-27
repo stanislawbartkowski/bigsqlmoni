@@ -1,0 +1,102 @@
+CT_ABORTED_TOTAL     |  The total number of coordinator activities at any nesting level that completed with errors. For service classes, if an activity is remapped to a different service subclass with a REMAP ACTIVITY action before it aborts, then this activity counts only toward the total of the subclass it aborts in.
+ACT_COMPLETED_TOTAL  | The total number of coordinator activities at any nesting level that completed successfully. For service classes, if an activity is remapped to a different subclass with a REMAP ACTIVITY action before it completes, then this activity counts only toward the total of the subclass it completes in.
+CLIENT_IDLE_WAIT_TIME |  This monitor element records time spent waiting for the client to send its next request. The value is given in milliseconds.
+FCM_RECV_VOLUME       | The total amount of data received via the FCM communications layer. This value is reported in bytes.
+FCM_RECVS_TOTAL       | Total number of buffers received for internal requests using the FCM communications mechanism. The fcm_recvs_total monitor element value is the sum of the values for the fcm_message_recvs_total and fcm_tq_recvs_total monitor elements.
+FCM_SENDS_TOTAL       | The total number of buffers sent using the internal FCM communications layer.
+FCM_RECV_WAIT_TIME    | The total time spent waiting to receive data through FCM. The value is given in milliseconds.
+FCM_SEND_WAIT_TIME    | The time spent blocking on an FCM send operation. This includes time spent waiting for buffers for internal requests to be flushed and time spent waiting for window count acknowledgements when sending data over table queues. The value is given in milliseconds.
+IPC_RECV_VOLUME       | The amount of data received by data server from clients over IPC. This value is reported in bytes.
+IPC_RECV_WAIT_TIME    | The time spent by an agent receiving an incoming client request using the IPC communications protocol. The value is reported in milliseconds.
+IPC_RECVS_TOTAL       | The number of times data was received by the database server from the client application using IPC.
+IPC_SEND_WAIT_TIME    | The time spent blocking on an IPC send to the client. The value is given in milliseconds.
+LOCK_WAIT_TIME        | The total elapsed time spent waiting for locks. The value is given in milliseconds.
+LOCK_WAITS            | The total number of times that applications or connections waited for locks.
+LOG_DISK_WAIT_TIME    | The amount of time an agent spends waiting for log records to be flushed to disk. The value is given in milliseconds.
+LOG_DISK_WAITS_TOTAL  | The number of times agents have to wait for log data to write to disk.
+RQSTS_COMPLETED_TOTAL  | The total number of requests executed, including both application and internal requests. For service subclasses, this monitor element is only updated where the request completes. If the request moved between different service subclasses, it is not counted twice.
+ROWS_MODIFIED          | The number of rows inserted, updated, or deleted.
+ROWS_READ              | The number of rows read from the table.
+ROWS_RETURNED          | The rows_returned monitor element is the number of rows that have been selected and returned to the application. This element has a value of 0 for partial activity records (for example, if an activity is collected while it is still executing or when a full activity record could not be written to the event monitor due to memory limitations).
+TCPIP_RECV_VOLUME      | The amount of data received by the data server from clients over TCP/IP. This value is reported in bytes.
+TCPIP_SEND_VOLUME      | The amount of data sent by data server to client. This value is reported in bytes.
+TCPIP_RECV_WAIT_TIME   | The time spent waiting for an incoming client request over TCP/IP excluding idle time. The value is given in milliseconds.
+TCPIP_RECVS_TOTAL      | The number of times data was received by the database server from the client application over TCP/IP.
+TCPIP_SEND_WAIT_TIME   | Time spent blocking on a TCP/IP send to the client. The value is given in milliseconds.
+TCPIP_SENDS_TOTAL      | The number of times data was sent from the database server to the client application over TCP/IP.
+TOTAL_APP_RQST_TIME    | The total elapsed time spent on application requests; this is the total time spent by coordinator agents on the server executing application requests. This value is reported in milliseconds.
+TOTAL_CPU_TIME         | The total amount of CPU time used while within the database system. Represents total of both user and system CPU time. This value is in microseconds.
+TOTAL_RQST_TIME        | The total amount of time spent working on requests. This value is reported in milliseconds.
+TOTAL_WAIT_TIME        | The total time spent waiting within the database server. The value is in milliseconds.
+TOTAL_SECTION_SORT_TIME         |  Total amount of time spent performing sorts while executing a section, which is the execution of the compiled query plan generated by the SQL statement that was issued by the client application. The value is given in milliseconds.
+APP_RQSTS_COMPLETED_TOTAL       |  Total number of external (application) requests executed by the coordinator. For service subclasses, this monitor element is updated only for the subclass where the application request completes.
+TOTAL_SECTION_SORT_PROC_TIME    |  Total amount of processing (non-wait) time spent performing sorts while executing a section, which is the execution of the compiled query plan generated by the SQL statement that was issued by the client application. The value is given in milliseconds.
+TOTAL_SECTION_SORTS            |   Total number of sorts performed during section execution, which is the execution of the compiled query plan generated by the SQL statement that was issued by the client application.
+TOTAL_COMPILE_TIME            |  The total amount of time spent performing explicit compiles on the database server. Explicit compiles are compilations directly initiated by a user request such as a bind, rebind, prepare or execute immediate. The value is given in milliseconds.
+TOTAL_COMPILATIONS              |  The total number of explicit compiles on the database server. Explicit compiles are compilations directly initiated by a user request such as a bind, rebind, prepare or execute immediate.
+TOTAL_SECTION_TIME              |  The total time agents spent performing section execution. The value is given in milliseconds.
+TOTAL_SECTION_PROC_TIME         |  The total amount of processing time agents spent performing section execution. Processing time does not include wait time. The value is given in milliseconds.
+TOTAL_APP_SECTION_EXECUTIONS    |  Number of section executions performed by an application.
+TOTAL_ACT_TIME                  |  The total amount of time spent executing activities. This value is given in milliseconds.
+TOTAL_ACT_WAIT_TIME             |  Total time spent waiting within the database server, while processing an activity. The value is given in milliseconds.
+ACT_RQSTS_TOTAL                 |  The number of individual coordinator and subagent requests completed as part of an activity. For example, a fetch on a cursor activity.
+TOTAL_ROUTINE_TIME              |  The total time spent executing routines. The value is given in milliseconds.
+TOTAL_ROUTINE_INVOCATIONS       |  The total number of times a routine was invoked.
+TOTAL_COMMIT_TIME               |  The total amount of time spent performing commit processing on the database server. The value is given in milliseconds.
+TOTAL_APP_COMMITS               |  Total number of commit statements issued by the client application.
+INT_COMMITS                     |  The total number of commits initiated internally by the database manager.
+TOTAL_ROLLBACK_TIME     |  The total amount of time spent performing rollback operations on the database server. The value is given in milliseconds.
+TOTAL_ROLLBACK_PROC_TIME        |  The total amount of time spent performing rollback operations on the database server. The value is given in milliseconds.
+TOTAL_APP_ROLLBACKS             |  Total number of rollback statements issued by the client application.
+CAT_CACHE_INSERTS               |  The number of times that the system tried to insert table descriptor or authorization information into the catalog cache.
+CAT_CACHE_LOOKUPS               | The package cache lookups monitor element counts the number of times that an application looked for a section or package in the package cache. At a database level, it indicates the overall number of references since the database was started, or monitor data was reset.  This counter includes the cases where the section is already loaded in the cache and when the section has to be loaded into the cache. In a concentrator environment where agents are being associated with different applications, additional package cache lookups may be required as a result of a new agent not having the required section or package available in local storage.
+POOL_DATA_LBP_PAGES_FOUND   | The number of times a data page was present in the local buffer pool.
+DIAGLOG_WRITES_TOTAL        | The number of times agents have written to the db2diag log file.
+DIAGLOG_WRITE_WAIT_TIME     | The time spent waiting on a write to the db2diag log file. The value is given in milliseconds.
+FCM_MESSAGE_RECVS_TOTAL     | The total number of buffers received as part of an FCM reply message containing the results of a previously sent FCM request message.
+FCM_MESSAGE_RECV_VOLUME     | The amount of data received for internal requests (such as RPCs) distributed by the FCM communications layer. This value is reported in bytes.
+FCM_MESSAGE_RECV_WAIT_TIME  | The fcm_message_recv_wait_time monitor element stores the time spent by an agent waiting for an FCM reply message containing the results of a previously sent FCM request message. This value reflects both the time required to send the response between partitions using FCM and the time required for the subagent to process the request message. The value is given in milliseconds
+FCM_MESSAGE_SENDS_TOTAL     | The total number of buffers distributed as part of internal requests using the FCM communications mechanism.
+FCM_MESSAGE_SEND_WAIT_TIME  | The time spent blocking on an FCM message send. The value is given in milliseconds. This monitor element reflects the time spent blocking for FCM buffers to be flushed from an FCM channel when distributing internal requests on the database system.
+FCM_MESSAGE_SEND_VOLUME     | Amount of data volume sent via internal FCM requests. This value is reported in bytes.
+FCM_MESSAGE_SEND_VOLUME     | Amount of data volume sent via internal FCM requests. This value is reported in bytes.
+FCM_MESSAGE_SEND_WAIT_TIME  | The time spent blocking on an FCM message send. The value is given in milliseconds. This monitor element reflects the time spent blocking for FCM buffers to be flushed from an FCM channel when distributing internal requests on the database system.
+FCM_TQ_RECVS_TOTAL          | The total number of buffers received from table queues using the internal FCM communications mechanism.
+FCM_TQ_RECV_WAIT_TIME       | The time spent waiting to receive the next buffer from a table queue. The value is given in milliseconds.
+FCM_TQ_SENDS_TOTAL          | The total number of buffers containing table queue data sent using the internal FCM communications mechanism.
+FCM_TQ_SEND_WAIT_TIME       | The time spent waiting to send the next buffer through a table queue. This reflects the time spent waiting for window count acknowledgements from the receiver end of the table queue. The value is given in milliseconds.
+FCM_TQ_SEND_VOLUME          | The amount of data sent over table queues by the FCM communications layer. This value is reported in bytes.
+TOTAL_ROUTINE_USER_CODE_PROC_TIME | The total amount of time spent processing user code in routines. The value is in milliseconds.
+TOTAL_ROUTINE_USER_CODE_TIME       | The total amount of time spent executing user code in routines. The value is in milliseconds.
+ROWS_DELETED | This is the number of row deletions attempted.
+PREFETCH_WAIT_TIME                 | The time an application spent waiting for an I/O server (prefetcher) to finish loading pages into the buffer pool. The value is given in milliseconds.
+PREFETCH_WAITS                     | The number of times waited for an I/O server (prefetcher) to finish loading pages into the buffer pool.
+APP_ACT_COMPLETED_TOTAL            | The total number of external, non-nested coordinator activities that completed successfully.
+APP_ACT_ABORTED_TOTAL              | The total number of external, non-nested coordinator activities that completed with errors. For service classes, if an activity is remapped to a different service subclass with a REMAP ACTIVITY action before it aborts, the activity counts only toward the total of the subclass in which it aborts.
+TOTAL_CONNECT_REQUEST_TIME         | The amount of time spent performing a connection or switch user request, in milliseconds.
+TOTAL_CONNECT_REQUESTS             | The total number of connection or switch user requests.
+TOTAL_HASH_LOOPS | The total number of times that a single partition of a hash join was larger than the available sort heap space.
+TOTAL_HASH_JOINS                   | The total number of hash joins executed.
+HASH_JOIN_OVERFLOWS                | The number of times that hash join data exceeded the available sort heap space.
+DYNAMIC_SQL_STMTS                  | The number of dynamic SQL statements that were attempted.
+STATIC_SQL_STMTS                   | The number of static SQL statements that were attempted.
+FAILED_SQL_STMTS                   | The number of SQL statements that were attempted, but failed.
+SELECT_SQL_STMTS                   | The number of SQL SELECT statements that were executed.
+UID_SQL_STMTS                      | The number of UPDATE, INSERT, MERGE and DELETE statements that were executed.
+DDL_SQL_STMTS                      | This element indicates the number of SQL Data Definition Language (DDL) statements that were executed.
+CALL_SQL_STMTS                     | The number of CALL statements that were executed.
+EXT_TABLE_RECV_WAIT_TIME           | The total amount of time that the agent spent waiting for the external table readers to read and process data from external tables. The value is given in milliseconds.
+EXT_TABLE_RECVS_TOTAL              | The total number of row batches received by the agent from the external table readers.
+EXT_TABLE_RECV_VOLUME              | The total volume of data received by the agent from the external table readers.
+EXT_TABLE_READ_VOLUME   | The total volume of data read by the external table readers from physical devices such as hard disks and solid state drives (SSD).
+EXT_TABLE_SEND_VOLUME              | The total volume of data sent by the agent to the external table writers.
+EXT_TABLE_SENDS_TOTAL              | The total number of row batches sent to the external table writers.
+EXT_TABLE_WRITE_VOLUME | The total volume of data written by the external table writers to physical devices such as hard disks and solid state drives (SSD)
+FCM_TQ_RECV_WAITS_TOTAL            | The total number of times that the Db2Ž system spent waiting to receive the next buffer from a table queue.
+FCM_MESSAGE_RECV_WAITS_TOTAL       | The total number of times that the Db2Ž system spent waiting for an FCM reply message containing the results of a previously sent FCM request message.
+FCM_TQ_SEND_WAITS_TOTAL            | The total number of times that the Db2Ž system spent waiting to send the next buffer through a table queue.
+FCM_MESSAGE_SEND_WAITS_TOTAL       | The total number of times that the Db2Ž system spent blocking on an FCM message send.
+FCM_SEND_WAITS_TOTAL               | The total number of times that the Db2Ž system spent blocking on an FCM send operation.
+FCM_RECV_WAITS_TOTAL               | The total number of times that the Db2Ž system spent waiting to receive data through FCM.
+APPL_SECTION_LOOKUPS               | Lookups of SQL sections by an application from its shared SQL workspace.
+APPL_SECTION_INSERTS               | Inserts of SQL sections by an application from its shared SQL workspace.

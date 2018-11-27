@@ -1,0 +1,10 @@
+create table XXtablenameXX ( tid integer not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1)
+  ,times timestamp
+  ,typ VARCHAR(20) NOT NULL
+  ,PRIMARY KEY (tid)
+);
+
+create table XXtablename1XX( tid integer not null, ID VARCHAR(100) NOT NULL, VALUE BIGINT, MEMBER INTEGER NOT NULL
+  ,FOREIGN KEY ID (ID)  REFERENCES XXtablename2XX ON DELETE NO ACTION
+  ,FOREIGN KEY TID (TID)  REFERENCES XXtablenameXX ON DELETE NO ACTION
+);

@@ -1,0 +1,1 @@
+* * * * * /home/sb/bigmoni/monjob.sh >>/tmp/bigmoni/moni.out 2>&1

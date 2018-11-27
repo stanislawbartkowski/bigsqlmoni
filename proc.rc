@@ -1,0 +1,52 @@
+source `dirname $0`/moni.rc
+
+#LOGDIR=`dirname $0`/log
+LOGDIR=/tmp/bigmonilog
+LOGFILE=$LOGDIR/moni.log
+LOGALERT=$LOGDIR/alert.log
+
+mkdir -p $LOGDIR
+
+# db2 "GRANT USE OF TABLESPACE SYSTOOLSPACE TO USER SB"
+# db2 grant dataaccess on database to user sb
+
+#set -x
+#w
+
+log() {
+  echo $1
+  echo $1 >>$LOGFILE
+}
+
+logfail() {
+  log "$1"
+  log "Exit immediately"
+  exit 1
+}
+
+logline() {
+  log "==================================="
+}
+
+alert() {
+  log "$1"
+  echo "$1" >>$LOGALERT
+}
+
+db2connect() {
+   log "Connect to $BIGSQLDB"
+   if [ -n "$BIGUSER" ]; then
+    db2 connect to $BIGSQLDB user $BIGUSER using $BIGPASSWORD >>$LOGFILE
+  else
+    db2 connect to $BIGSQLDB >>$LOGFILE
+  fi
+  [ $? -eq 0 ] || logfail "Cannot connect"
+  log "I'm connected"
+}
+
+db2close() {
+  log "Disconnect from $BIGSQLDB"
+  db2 terminate >>$LOGFILE
+  [ $? -eq 0 ] || logfail "Cannot disconnect"
+  log "I'm closed"
+}

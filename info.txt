@@ -1,0 +1,17 @@
+Installation:
+
+1) modify moni.rc
+
+2) create tables and module
+ installmon.sh dictable
+ installmon.sh valtables
+ installmon.sh views
+ installmon.sh module
+
+3) gather statistics, example (more than one)
+  db2 "CALL MON.MONI.GATHERMONITORING ('SELECT * FROM TABLE(MON_GET_WORKLOAD(''SYSDEFAULTUSERWORKLOAD'',-2))','WORKLOAD')"
+
+4) export to csv
+mkdir -p /tmp/export
+db2 "CALL UTL_DIR.CREATE_OR_REPLACE_DIRECTORY('expdir','/tmp/export')"
+db2 "CALL MON.MONI.EMITTEXT('SELECT * FROM MON.VMETRICS ORDER BY NUM','expdir','num.txt')"
