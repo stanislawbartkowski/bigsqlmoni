@@ -51,8 +51,22 @@ some conclusion out of it.
 
 ## Configuration
 
+It is a good practice to install the solution in separate schema and use seperate user authorized only for monitoring task.
+
 Modify moni.rc file if necessary
 
 | Variable | Description | Default value
 | --------- |:---------------|:---------:|
-
+| BIGSQLDB | Database name | bigsql |
+| BUGUSER  | Database user, can be commented out if local connection | Commented out
+| BIGPASSWD | Database password , can be commented out if local connection | Commented out
+| DICTTEXT | File used to feed dictatble table ! dict.txt
+| DICTABLE | The name of dicttable, can contain schema | MONIT.dictable
+| TTABLE | The name of header table | MONIT.ttable
+| VTABLE | The name of metrics detail table | MONIT.mtable
+| VVIEW | The name of supporting view to extract data | VVIEW=MONIT.vmetrics
+| MODULE | The name of module, container for stored procedures | MONIT.moni
+| FROMAVG | THe beginning of reference averge period in YYYY-MM-DD format | "2018-08-07"
+| TOAVG | The end of reference average period | "2018-08-09"
+| LIMIT | |
+| THRESH | |
