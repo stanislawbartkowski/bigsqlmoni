@@ -14,15 +14,12 @@ some conclusion out of it.
 
 ##TODO
 
-### General description
-## Istallation
-##TODO
-## Data collection
-##TODO
-## Monitoring
+# Solution description
+## General 
+
 ##TODO
 
-### Schema description
+## Schema description
 
 ##TODO
 
@@ -47,7 +44,7 @@ some conclusion out of it.
 
 ##TODO
 
-### Schema deployment
+# Schema deployment
 
 ## Configuration
 
@@ -79,7 +76,7 @@ Modify moni.rc file if necessary
 ./installmon.sh views
 ./installmon.sh module
 ```
-### Collecting data
+# Collecting data
 
 ## Prepare monitoring query
 
