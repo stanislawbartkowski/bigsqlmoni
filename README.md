@@ -73,3 +73,9 @@ Modify moni.rc file if necessary
 
 # Schema creation
 
+```bash
+./installmon.sh dictable
+./installmon.sh valtables
+./installmon.sh views
+./installmon.sh module
+```
