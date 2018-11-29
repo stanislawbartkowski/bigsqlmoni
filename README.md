@@ -71,7 +71,7 @@ Modify moni.rc file if necessary
 | LIMIT | |
 | THRESH | |
 
-# Schema creation
+## Schema creation
 
 ```bash
 ./installmon.sh dictable
@@ -79,3 +79,27 @@ Modify moni.rc file if necessary
 ./installmon.sh views
 ./installmon.sh module
 ```
+### Collecting data
+
+## Prepare monitoring query
+
+There is a number of monitoring views available. More details: https://www.ibm.com/support/knowledgecenter/en/SSCRJT_5.0.1/com.ibm.swg.im.bigsql.admin.doc/doc/admin_monitor-bigsql-query.html
+
+The tools is able to analyze dynamically any query and feed metrics table. The general rules are:
+* Only BIGINT column types are collected.
+* The column name should be enlisted in DICTABLE/dict.txt
+* If MEMBER column is discovered, it is copied to the MEMBER columnm in metrics table
+* All other columns are ignored.
+
+Example:
+```sql
+SELECT * FROM TABLE(MON_GET_WORKLOAD('SYSDEFAULTUSERWORKLOAD',-2))
+```
+All columns reported and found in DICTABLE are collected. It is the most general monitoring query.
+```sql
+SELECT MEMBER, ROWS_READ, EXT_TABLE_RECV_WAIT_TIME FROM TABLE(MON_GET_DATABASE( -2)) AS t order by MEMBER
+```
+Only ROWS_READ and EXT_TABLE_RECV_WAIT_TIME metric is collected
+
+
+
