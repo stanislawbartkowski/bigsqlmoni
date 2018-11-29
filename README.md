@@ -99,7 +99,7 @@ All columns reported and found in DICTABLE are collected. It is the most general
 ```sql
 SELECT MEMBER, ROWS_READ, EXT_TABLE_RECV_WAIT_TIME FROM TABLE(MON_GET_DATABASE( -2)) order by MEMBER
 ```
-Only ROWS_READ and EXT_TABLE_RECV_WAIT_TIME metric is collected
+Only ROWS_READ and EXT_TABLE_RECV_WAIT_TIME metrics are collected.
 
 
 
