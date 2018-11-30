@@ -106,7 +106,7 @@ The GATHERMONITORING procedure takes two parameters.
 
 The procedure executes the query and analyze the result set as described above. For every execution, a single 'ttable' record is created and a list of corresponding record in 'mtable' table.
 
-## Collecting the data as crontab job.
+## Collecting monitoring data as crontab job.
 
 Data can be collected using Linux crontab job. Firstly a wrapping bash script file should be created. Example (monjob.sh)
 ```bash
@@ -132,6 +132,8 @@ Next step is to prepare valid 'crontab' file. Example:
 ```
 * * * * * /home/sb/bigmoni/monjob.sh >>/tmp/bigmoni/moni.out 2>&1
 ```
-Very important: The crontab schedule defines to time interval the monitoring data is collected. In this example, to crontab job is executed very minute, so the data collected reflects one minute interval. One can specify a different schedule if different data precision is required.
+Very important: The crontab schedule defines to time interval the monitoring data is collected. In this example, to crontab job is executed every minute, so the data collected reflects one minute interval. One can specify a different schedule if different data precision is required.
 
+## Collecting monitoring data as DB2 task
 
+Another method is to use 
