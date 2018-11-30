@@ -98,5 +98,40 @@ SELECT MEMBER, ROWS_READ, EXT_TABLE_RECV_WAIT_TIME FROM TABLE(MON_GET_DATABASE( 
 ```
 Only ROWS_READ and EXT_TABLE_RECV_WAIT_TIME metrics are collected.
 
+## GATHERMONITORING stored procedure
+
+The GATHERMONITORING procedure takes two parameters.
+* The first is the monitoring query to be executed
+* The second is the monitoring identifier/type. The identifier is significant if more then one monitoring query is applied. It allows to differentiate metrics coming from different queries. The identifier is assigned to 'typ' column in 'ttable' table.
+
+The procedure executes the query and analyze the result set as described above. For every execution, a single 'ttable' record is created and a list of corresponding record in 'mtable' table.
+
+## Collecting the data as crontab job.
+
+Data can be collected using Linux crontab job. Firstly a wrapping bash script file should be created. Example (monjob.sh)
+```bash
+source /etc/profile
+source $HOME/.bashrc
+source `dirname $0`/moni.rc
+
+DB=BIGSQL
+DB2=db2
+
+date
+$DB2 connect to $DB 
+$DB2 "CALL $MODULE.GATHERMONITORING ('SELECT * FROM TABLE(MON_GET_WORKLOAD(''SYSDEFAULTUSERWORKLOAD'',-2))','WORKLOAD')"
+$DB2 terminate
+```
+The script should fullfil requirements for crontab job. The monitoring query is
+```sql
+SELECT * FROM TABLE(MON_GET_WORKLOAD(''SYSDEFAULTUSERWORKLOAD'',-2))
+```
+and metrics identifier 'WORKLOAD'. The identifier matters only if there is more then one monitoring query.
+
+Next step is to prepare valid 'crontab' file. Example:
+```
+* * * * * /home/sb/bigmoni/monjob.sh >>/tmp/bigmoni/moni.out 2>&1
+```
+Very important: The crontab schedule defines to time interval the monitoring data is collected. In this example, to crontab job is executed very minute, so the data collected reflects one minute interval. One can specify a different schedule if different data precision is required.
 
 
