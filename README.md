@@ -167,3 +167,39 @@ db2 "SELECT * from SYSTOOLS.ADMIN_TASK_STATUS"
 ```
 Like crontab, the task schedule defines the time interval. Here the data is collected every one minute.
 
+# Metrics extraction
+
+## EMITTEXT, extract data as CSV file
+
+Data can be extracted using EMITTEXT stored procedure. The output can be used for off-line analysis. The output file is stored on the host where BigSQL Head is installed.
+
+EMITTEXT stored procedure takes three parameters:
+* Investigative query to extract data
+* Directory where output file is saved.  
+* Output file name
+
+An example of data extraction (extract.sh bash script)
+```bash
+source `dirname $0`/proc.rc
+EXPORTDIR=/tmp/export
+
+#set -x
+#w
+
+export() {
+  mkdir -p $EXPORTDIR
+  # very important for non bigsql user
+  # give bigsql, instance owner, write access to this directory
+  chmod 777 $EXPORTDIR
+  db2connect
+  db2 "CALL UTL_DIR.CREATE_OR_REPLACE_DIRECTORY('expdir','$EXPORTDIR')"
+  [ $? -eq 0 ] || logfail "Cannot CREATE_OR_REPLACE_DIRECTORY"
+  db2 "CALL $MODULE.EMITTEXT('select num,times,0 as member,id,sum(val) as val from $VVIEW group by times,num,id order by num','expdir','num.txt')"
+  [ $? -eq 0 ] || logfail "CALL EMITTEXT failed"
+  db2close
+}
+
+export
+```
+The investigative query can be modified according to needs. The output file is stored in /tmp/export/num.txt file.
+
