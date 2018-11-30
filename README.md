@@ -203,3 +203,7 @@ export
 ```
 The investigative query can be modified according to needs. The output file is stored in /tmp/export/num.txt file.
 
+## Extract data directly
+For on-line analysis supporting monit.vmetrics view can be queried directly. The view returns a difference between two consecutive metric values.
+For instance:
+
