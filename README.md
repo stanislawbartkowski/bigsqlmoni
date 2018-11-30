@@ -76,6 +76,8 @@ Modify moni.rc file if necessary
 ./installmon.sh views
 ./installmon.sh module
 ```
+Important: ./installmon.sh valtables removes tables if exist. Should be used with caution, otherwise all monitoring data collected so far maybe wiped out.
+
 # Collecting data
 
 ## Prepare monitoring query
@@ -140,12 +142,28 @@ Another method is to use DB2 task scheduler.
 
 https://www.ibm.com/support/knowledgecenter/ro/SSEPGG_11.1.0/com.ibm.db2.luw.admin.gui.doc/doc/c0054380.html
 
-Firstly it necessary to create a wrapping stored procedure. GATHERMONITORING cannot be used directly because task scheduler does not allow SP parameters.
+Firstly it necessary to create a wrapping stored procedure. Passing parameters to procedure used as a task is possible but complicated.
 
 ```sql
 CREATE OR REPLACE PROCEDURE MONIT.RUNJOB ()
 P1: BEGIN  
   CALL MONIT.MONI.GATHERMONITORING ('SELECT * FROM TABLE(MON_GET_WORKLOAD(''SYSDEFAULTUSERWORKLOAD'',-2))','WORKLOAD');
 END P1
-;
+@
 ```
+The SP can be deployed using command
+```bash
+db2 -td@ -vf spmon.db2
+```
+Next step is to start the task.
+
+```bash
+CALL SYSPROC.ADMIN_TASK_ADD('Collecting metrics every minute', NULL,  NULL, NULL,'*  * * * *','MONIT', 'RUNJOB',NULL,NULL,NULL);
+```
+The task should be activated after several minutes.
+The execution can be monitored by a query:
+```bash
+db2 "SELECT * from SYSTOOLS.ADMIN_TASK_STATUS"
+```
+Like crontab, the task schedule defines the time interval. Here the data is collected every one minute.
+
