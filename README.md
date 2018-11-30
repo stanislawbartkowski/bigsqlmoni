@@ -134,6 +134,18 @@ Next step is to prepare valid 'crontab' file. Example:
 ```
 Very important: The crontab schedule defines to time interval the monitoring data is collected. In this example, to crontab job is executed every minute, so the data collected reflects one minute interval. One can specify a different schedule if different data precision is required.
 
-## Collecting monitoring data as DB2 task
+## Collecting monitoring data as DB2 task 
 
-Another method is to use 
+Another method is to use DB2 task scheduler.
+
+https://www.ibm.com/support/knowledgecenter/ro/SSEPGG_11.1.0/com.ibm.db2.luw.admin.gui.doc/doc/c0054380.html
+
+Firstly it necessary to create a wrapping stored procedure. GATHERMONITORING cannot be used directly because task scheduler does not allow SP parameters.
+
+```sql
+CREATE OR REPLACE PROCEDURE MONIT.RUNJOB ()
+P1: BEGIN  
+  CALL MONIT.MONI.GATHERMONITORING ('SELECT * FROM TABLE(MON_GET_WORKLOAD(''SYSDEFAULTUSERWORKLOAD'',-2))','WORKLOAD');
+END P1
+;
+```
