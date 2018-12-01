@@ -206,4 +206,31 @@ The investigative query can be modified according to needs. The output file is s
 ## Extract data directly
 For on-line analysis supporting monit.vmetrics view can be queried directly. The view returns a difference between two consecutive metric values.
 For instance:
+Assuming that metrics go:
+
+| NUM | Metric | Value
+| --------- |:---------------|:---------:|
+| 123 | ROWS_READ | 133268  |
+| 124 | ROWS_READ | 227095  |
+| 125 | ROWS_READ | 321590  |
+| 126 | ROWS_READ | 359820  |
+| 127 | ROWS_READ | 493445 |
+| 128 | ROWS_READ | 531738 |
+| 129 | ROWS_READ | 532131 |
+| 130 | ROWS_READ | 551722 |
+
+The corresponding entries in monit.vmetrics will look like:
+
+| NUM | Metric | Value
+| --------- |:---------------|:---------:|
+| 121 | ROWS_READ | 37781  |
+| 122 | ROWS_READ | 93827  |
+| 123 | ROWS_READ | 94495  |
+| 124 | ROWS_READ | 38230  |
+| 125 | ROWS_READ | 133625 |
+| 126 | ROWS_READ | 38293 |
+| 127 | ROWS_READ | 393 |
+| 128 | ROWS_READ | 19591 |
+
+
 
