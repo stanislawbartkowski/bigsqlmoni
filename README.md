@@ -232,5 +232,10 @@ The corresponding entries in monit.vmetrics will look like:
 | 127 | ROWS_READ | 393 |
 | 128 | ROWS_READ | 19591 |
 
+# Metrics analysis
+It does not make any sens to gather statitics for the purpose of gathering only. This topis requires further analysis. So far I developed a simple solution to discover heavy workload.
+* Collect metrics for average workload
+* Collect metrics for heavy workload and note which metrics are changing significantly
+
 
 
