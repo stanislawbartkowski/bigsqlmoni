@@ -63,7 +63,7 @@ Modify moni.rc file if necessary
 | VTABLE | The name of metrics detail table | MONIT.mtable
 | VVIEW | The name of supporting view to extract data | VVIEW=MONIT.vmetrics
 | MODULE | The name of module, container for stored procedures | MONIT.moni
-| FROMAVG | THe beginning of reference averge period in YYYY-MM-DD format | "2018-08-07"
+| FROMAVG | THe beginning of reference average period in YYYY-MM-DD format | "2018-08-07"
 | TOAVG | The end of reference average period | "2018-08-09"
 | LIMIT | |
 | THRESH | |
@@ -233,9 +233,54 @@ The corresponding entries in monit.vmetrics will look like:
 | 128 | ROWS_READ | 19591 |
 
 # Metrics analysis
-It does not make any sens to gather statitics for the purpose of gathering only. This topis requires further analysis. So far I developed a simple solution to discover heavy workload.
+It does not make any sens to gather statitics for the purpose of gathering only. This topis requires further analysis. So far I developed a simple solution to discover heavy workload oncoming.
 * Collect metrics for average workload
-* Collect metrics for heavy workload and note which metrics are changing significantly
+* Collect metrics for heavy workload and note which metrics are changing significantly. The following metrics are good candidates: ROWS_READ, FCM_MESSAGE_RECV_WAIT_TIME, FCM_TQ_SEND_VOLUME, FCM_TQ_SEND_WAITS_TOTAL, EXT_TABLE_RECV_VOLUME, EXT_TABLE_RECV_WAIT_TIME,FCM_TQ_RECVS_TOTAL,FCM_TQ_RECV_WAITS_TOTAL.
+* Compare the average for normal workload with avarage for heavy workload.
+* If the average for heavy workload exceeds significantly the normal average then raise the alarm.
+
+The solution is implemented in instalmon.sh script file:
+```bash
+runforid() {
+  local id=$1
+  runquery "SELECT AVG(VAL) FROM $VSUMVIEW WHERE ID='$id' AND TIMES>'$FROMAVG' AND TIMES<'$TOAVG'"
+  local AVG=$RES
+  runquery "SELECT AVG(VAL) FROM (SELECT VAL,NUM FROM $VSUMVIEW WHERE ID='$id' ORDER BY NUM DESC LIMIT $LIMIT)"
+  local CURR=$RES
+  log "$id AVG=$AVG CURR=$CURR"
+  if expr $CURR \> $AVG \* $TRESH; then
+    local da=`date`
+    alert "$da $id AVG=$AVG CURRENT=$CURR"
+  fi
+}
+
+runmonitor() {
+#  runforid ROWS_READ
+  while read -r id; do
+    runforid $id
+  done <`dirname $0`/listmon.txt
+}
 
 
+```
+The parameters are defined in 'moni.rc' file
 
+| Variable | Description | Default value
+| --------- |:---------------|:---------:|
+| FROMAVG | Beginning of reference normal workload | "2018-08-07" |
+| TOAVG | The end of reference normal workload | "2018-08-11" |
+| LIMIT | Number of metrics backward to calculate current average | 5 |
+| TRESH | Threshold multipliers to raise the alart | 3, meaning that current average should exceed normal 3 times |
+
+Monitoring can be enable as another crontab job.
+```bash
+source /etc/profile
+source $HOME/.bashrc
+`dirname $0`/installmon.sh monitor
+```
+Corresponding crontab line
+```
+* * * * * /var/iophome/bigsql/eh2bahw/moni/report.sh >>/tmp/moni/report.out 2>&1
+```
+The job check the current average every one minute and raise the alarm if the everage exceedes treshold. The alert is written to listmon.txt file.
+The solution is perfect, requires further investigation and tunning.
