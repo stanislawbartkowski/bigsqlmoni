@@ -244,10 +244,10 @@ The corresponding entries in monit.vmetrics will look like:
 
 # Metrics analysis
 It does not make any sense to gather statistics for the purpose of gathering only. This topic requires further analysis. So far I developed a simple solution to discover heavy workload oncoming.
-* Collect metrics for an averege workload
+* Collect metrics for an average workload
 * Collect metrics for heavy workload and note which metrics are changing significantly. The following metrics are good candidates: ROWS_READ, FCM_MESSAGE_RECV_WAIT_TIME, FCM_TQ_SEND_VOLUME, FCM_TQ_SEND_WAITS_TOTAL, EXT_TABLE_RECV_VOLUME, EXT_TABLE_RECV_WAIT_TIME,FCM_TQ_RECVS_TOTAL,FCM_TQ_RECV_WAITS_TOTAL.
 * Compare the average for a normal workload with the average for a heavy workload.
-* If the average for heavy workload exceeds significantly the normal average then raise the alarm.
+* If the average for current workload exceeds significantly the normal average then raise the alarm.
 
 The solution is implemented in instalmon.sh script file:
 ```bash
