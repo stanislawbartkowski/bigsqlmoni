@@ -7,21 +7,34 @@ https://www.ibm.com/support/knowledgecenter/en/SSCRJT_5.0.3/com.ibm.swg.im.bigsq
 # Inspiration
 
 BigSQL which is based on DB2, provides a variety of different metrics reflecting workload and performance of SQL Engine.  
-But the single metric is only the number, and by itself does not provide any meaningful information unless one is familiar with DB2
-internals. For instance: assuming the EXT_TABLE_RECV_WAIT_TIME brings 11630, what is means? It is good or bad?
-Instead of pure numbers, much more valuable is observing the trends and provided that the metrics are growing or decreasing, try to make 
-some conclusion out of it.
+But the single metric is only the number, and by itself does not provide any meaningful information unless one is familiar with DB2 internals. For instance: assuming the EXT_TABLE_RECV_WAIT_TIME brings 11630, what is means? It is good or bad?
+Metrics are cumulative, so instead of pure values much more informative is trend how the metrics are growing. One can assume that when the metric is growing rapidly it means heavy workload underway.
 
-##TODO
+The solution allows harvesting current metrics values and keeps all historical values. It also pivots the data, one row of metrics transforms into series of records metrics id/value. 
 
 # Solution description
+
 ## General 
 
-##TODO
+The solution allows harvesting current metrics values and keeps all historical values. It also pivots the data, one row of metrics transforms into series of records metric id / metric value. There is a view defined which transform absolute values into a difference between two consecutive measures. 
+The solution contains the following elements:
+* Simple database schema, three tables and two views.
+* Schema deployment, the tables name including the schema name are configurable
+* DB2 SQL module containing stored procedures to collect data and extract data
+* Two ways of data collecting, as Linux crontab job or DB2 scheduled task
+* A simple example of data analysis to predict oncoming heavy workload. This topis requires further tunning.
 
-## Schema description
+## Database schema description
+![alt text](images/Zrzut%20ekranu%20z%202018-12-02%2023-21-22.png)
 
-##TODO
+| File        | Description
+| ------------- |:-------------:|
+| ttable | Metric values header |
+| mtable | List of detailed metrics values connected to single ttable record through foreign key |
+| dictable | Static table, description for measure id, only measures present in dictable are collected |
+| vmetrics | View containing difference between two consecutive values for a metric |
+| vsummetrics | View containing a sum of metric values across members |
+
 
 ## File description
 
@@ -41,8 +54,6 @@ some conclusion out of it.
 | monjob.sh | Bash script file to collect next bunch of statistics 
 | proc.rc | Common shared bash functions
 | report.sh | Bash script file for monitoring
-
-##TODO
 
 # Schema deployment
 
