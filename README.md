@@ -293,4 +293,4 @@ Corresponding crontab line
 * * * * * /var/iophome/bigsql/eh2bahw/moni/report.sh >>/tmp/moni/report.out 2>&1
 ```
 The job checks the current average every one minute and raises the alarm if the average exceeds the threshold. The alert is written to listmon.txt file.
-The solution is perfect, requires further investigation and tunning.
+But this solution is lame and during testing did not provide satisfactory results, requires further investigation and tunning.
