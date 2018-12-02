@@ -32,7 +32,7 @@ importdictable() {
   db2connect
   droptable $DICTABLE
   runcreatescript createdicttable.sql $DICTABLE
-  log "Load data from $DICTABLE "
+  log "Load data from $tdict into $DICTABLE "
   db2 -tv "load client from $tdict of del modified by coldel| insert into $DICTABLE" >>$LOGFILE
   [ $? -eq 0 ] || logfail "Cannot load data"
   db2close
