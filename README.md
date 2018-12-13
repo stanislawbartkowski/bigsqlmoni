@@ -89,6 +89,23 @@ Modify moni.rc file if necessary
 ```
 Important: ./installmon.sh valtables removes tables if exist. Should be used with caution, otherwise, all monitoring data collected so far maybe wiped out.
 
+Verify that schema is created.
+
+```bash
+[sb@myhdp1 bigsqlmoni]$ db2 list tables for schema monit
+
+Table/View                      Schema          Type  Creation time             
+------------------------------- --------------- ----- --------------------------
+DICTABLE                        MONIT           T     2018-12-13-12.13.15.297106
+MTABLE                          MONIT           T     2018-12-13-12.13.23.405204
+TTABLE                          MONIT           T     2018-12-13-12.13.22.830088
+VMETRICS                        MONIT           V     2018-12-13-12.13.34.657891
+VSUMMETRICS                     MONIT           V     2018-12-13-12.13.34.689203
+
+  5 record(s) selected.
+
+```
+
 # Collecting data
 
 ## Prepare monitoring query
