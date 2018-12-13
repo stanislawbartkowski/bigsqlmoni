@@ -72,12 +72,19 @@ Modify moni.rc file if necessary
 | DICTABLE | The name of dicttable, can contain schema | MONIT.dictable
 | TTABLE | The name of header table | MONIT.ttable
 | VTABLE | The name of metrics detail table | MONIT.mtable
-| VVIEW | The name of supporting view containing the difference between consecutive metric values | VVIEW=MONIT.vmetrics
+| VVIEW | The name of supporting view containing the difference between consecutive metric values | MONIT.vmetrics
 | MODULE | The name of a module, container for stored procedures | MONIT.moni
-| FROMAVG | THe beginning of reference average period in YYYY-MM-DD format | "2018-08-07"
+| FROMAVG | The beginning of reference average period in YYYY-MM-DD format | "2018-08-07"
 | TOAVG | The end of reference average period | "2018-08-09"
 | LIMIT | |
-| THRESH | |
+| TRESH | |
+
+Steps to start data collection
+* Create the user owning monitoring
+* Configure moni.rc file. The parameters FROMAVG, TOAVG, LIMIT and TRESH can be set later
+* Create the schema
+* Decide on monitoring query or use preconfigured
+* Start the job, either as crontab job or DB2 scheduled task
 
 ## Schema creation
 
@@ -195,6 +202,7 @@ The execution can be monitored by a query:
 db2 "SELECT * from SYSTOOLS.ADMIN_TASK_STATUS"
 ```
 Like crontab, the task schedule defines the time interval. Here the data is collected every one minute.
+Important: it can take several minutes until the task is activated and reported in ADMIN_TASK_STATUS.
 
 # Metrics extraction
 
