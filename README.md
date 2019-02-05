@@ -28,7 +28,7 @@ The solution contains the following elements:
 ![alt text](images/Zrzut%20ekranu%20z%202018-12-02%2023-21-22.png)
 
 | File        | Description
-| ------------- |:-------------:|
+|-------------|-------------|
 | ttable | Metric values header |
 | mtable | List of detailed metrics values connected to single ttable record through foreign key |
 | dictable | Static table, description for measure id, only measures present in dictable are collected |
@@ -39,7 +39,7 @@ The solution contains the following elements:
 ## File description
 
 | File        | Description
-| ------------- |:-------------:|
+|-------------|-------------|
 | createdicttable.sql | Template to create dictionary table, metrics description |
 | createmoni.sql | Template to create moni module containing stored procedures |
 | createmonitables.sql | Template to create header and detail tables |
