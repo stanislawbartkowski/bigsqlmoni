@@ -199,6 +199,7 @@ CALL SYSPROC.ADMIN_TASK_ADD('Collecting metrics every minute', NULL,  NULL, NULL
 The task will be activated after several minutes.
 The execution can be monitored by a query:
 ```bash
+db2 "SELECT VARCHAR(NAME,50),TASKID,PROCEDURE_NAME from SYSTOOLS.ADMIN_TASK_LIST"
 db2 "SELECT * from SYSTOOLS.ADMIN_TASK_STATUS"
 ```
 Like crontab, the task schedule defines the time interval. Here the data is collected every one minute.
