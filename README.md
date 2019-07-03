@@ -66,8 +66,8 @@ Modify moni.rc file if necessary
 | Variable | Description | Default value
 | --------- |:---------------|:---------:|
 | BIGSQLDB | Database name | bigsql |
-| BIGUSER  | Database user, can be commented out if local connection | Commented out. Not necessary if local connection is used
-| BIGPASSWD | Database password , can be commented out if local connection | Commented out
+| BIGUSER  | Database user, can be commented out if local connection | Commented out. Not necessary if local connection is used. Should be set if the monitoring user is different then local user
+| BIGPASSWD | Database password , can be commented out if local connection | Commented out. Should be set if the monitoring user is different then local user
 | DICTTEXT | File used to feed dictatble table ! dict.txt
 | DICTABLE | The name of dicttable, can contain schema | MONIT.dictable
 | TTABLE | The name of header table | MONIT.ttable
@@ -90,7 +90,11 @@ Steps to start data collection
 ## Create user owning moniring
 * Create local linux/AD user, for instance bigsqlmn
 * source db2 profile, add to .bashrc : source /home/db2inst1/sqllib/db2profile
-
+* as instance owner user (bigsql), create schema and grant privileges<br>
+> db2 create schema monit<br>
+> db2 grant alterin,createin,dropin on schema monit to user bigsqlmn<br>
+> db2 grant load on database to user bigsqlmn<br>
+> db2 grant execute on function SYSPROC.MON_GET_WORKLOAD to bigsqlmn<br>
 
 ## Schema creation
 
@@ -101,7 +105,9 @@ Steps to start data collection
 ./installmon.sh module
 ```
 Important: ./installmon.sh valtables removes tables if exist. Should be used with caution, otherwise, all monitoring data collected so far maybe wiped out.
-
+<br>
+Troubleshooting: tail -f /tmp/bigmonilog/moni.log 
+<br>
 Verify that schema is created.
 
 ```bash
