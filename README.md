@@ -94,7 +94,7 @@ Steps to start data collection
 > db2 create schema monit<br>
 > db2 grant alterin,createin,dropin on schema monit to user bigsqlmn<br>
 > db2 grant load on database to user bigsqlmn<br>
-
+> db2 grant execute on function SYSPROC.MON_GET_WORKLOAD to bigsqlmn<br>
 
 ## Schema creation
 
