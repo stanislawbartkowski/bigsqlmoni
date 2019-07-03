@@ -3,11 +3,16 @@ source `dirname $0`/proc.rc
 #set -x
 #w
 
-droptable() {
-  local tablename=$1
-  log "Drop table $tablename"
-  db2 -tv "DROP TABLE $tablename" >>$LOGFILE
+dropobject() {
+  local -r what=$1
+  local -r oname=$2
+  log "Drop $what $oname"
+  db2 -tv "DROP $what $oname" >>$LOGFILE
   # do not verify the exit
+}
+
+droptable() {
+  dropobject table $1
 }
 
 runcreatescript() {
@@ -59,7 +64,22 @@ createmodule() {
     [ $RES -eq 0 ] || logfail "Cannot create module"
   fi
   db2close
+}
 
+dropall() {
+  log "Drop module"
+  db2connect
+  dropobject module $MODULE
+  log "Drop tables"
+  droptable $VTABLE
+  droptable $TTABLE
+  droptable $DICTABLE
+  log "Drop views"
+  dropobject view $VVIEW
+  dropobject view $VSUMVIEW
+  log "drop monit.runjob"
+  dropobject procedure monit.runjob
+  db2close
 }
 
 drawhelp() {
@@ -69,6 +89,7 @@ drawhelp() {
   echo "      views"
   echo "      module"
   echo "      monitor"
+  echo "      dropall"
 }
 
 createviews() {
@@ -118,5 +139,6 @@ case $1 in
   "views") createviews;;
   "module") createmodule;;
   "monitor") runmonitor;;
+  "dropall") dropall;;
   *) drawhelp; exit 4;;
 esac
