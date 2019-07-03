@@ -6,6 +6,8 @@ https://hoteljavaopensource.blogspot.com/2018/12/bigsql-monitoring.html
 
 https://www.ibm.com/support/knowledgecenter/en/SSCRJT_5.0.3/com.ibm.swg.im.bigsql.doc/doc/admin_monitor-bigsql-query.html
 
+Important: the module is not working on BigSQL 6.0. Under investigation.
+
 # Inspiration
 
 BigSQL which is based on DB2 provides a variety of different metrics reflecting workload and performance of SQL Engine.  
