@@ -90,6 +90,9 @@ Steps to start data collection
 ## Create user owning moniring
 * Create local linux/AD user, for instance bigsqlmn
 * source db2 profile, add to .bashrc : source /home/db2inst1/sqllib/db2profile
+* as instance owner user (bigsql), create schema and grant privileges<br>
+> db2 create schema monit<br>
+> db2 grant alterin,createin,dropin on schema monit to user bigsqlmn<br>
 
 
 ## Schema creation
