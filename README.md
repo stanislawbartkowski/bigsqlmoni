@@ -104,7 +104,9 @@ Steps to start data collection
 ./installmon.sh module
 ```
 Important: ./installmon.sh valtables removes tables if exist. Should be used with caution, otherwise, all monitoring data collected so far maybe wiped out.
-
+<br>
+Troubleshooting: tail -f /tmp/bigmonilog/moni.log 
+<br>
 Verify that schema is created.
 
 ```bash
