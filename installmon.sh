@@ -52,7 +52,12 @@ createmodule() {
   db2connect
   log "Create module $MODULE"
   cat createmoni.sql | sed s/XXmoduleXX/$MODULE/g | sed s/XXdictableXX/$DICTABLE/g | sed s/XXtablenameXX/$TTABLE/g | sed s/XXtablename1XX/$VTABLE/g | db2 -td@ -v >>$LOGFILE
-  [ $? -eq 0 ] || logfail "Cannot create module"
+  local -r RES=$?
+  if [ $RES -eq 2 ]; then
+    echo "Warning is reported. The module is created but verify the log gile $LOGFILE"
+  else
+    [ $RES -eq 0 ] || logfail "Cannot create module"
+  fi
   db2close
 
 }
