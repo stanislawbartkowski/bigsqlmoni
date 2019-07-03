@@ -66,8 +66,8 @@ Modify moni.rc file if necessary
 | Variable | Description | Default value
 | --------- |:---------------|:---------:|
 | BIGSQLDB | Database name | bigsql |
-| BIGUSER  | Database user, can be commented out if local connection | Commented out. Not necessary if local connection is used
-| BIGPASSWD | Database password , can be commented out if local connection | Commented out
+| BIGUSER  | Database user, can be commented out if local connection | Commented out. Not necessary if local connection is used. Should be set if the monitoring user is different then local user
+| BIGPASSWD | Database password , can be commented out if local connection | Commented out. Should be set if the monitoring user is different then local user
 | DICTTEXT | File used to feed dictatble table ! dict.txt
 | DICTABLE | The name of dicttable, can contain schema | MONIT.dictable
 | TTABLE | The name of header table | MONIT.ttable
