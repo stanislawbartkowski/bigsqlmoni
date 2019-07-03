@@ -93,6 +93,7 @@ Steps to start data collection
 * as instance owner user (bigsql), create schema and grant privileges<br>
 > db2 create schema monit<br>
 > db2 grant alterin,createin,dropin on schema monit to user bigsqlmn<br>
+> db2 grant load on database to user bigsqlmn<br>
 
 
 ## Schema creation
