@@ -77,7 +77,8 @@ Modify moni.rc file if necessary
 | FROMAVG | The beginning of reference average period in YYYY-MM-DD format | "2018-08-07"
 | TOAVG | The end of reference average period | "2018-08-09"
 | LIMIT | |
-| TRESH | |
+| TRESH | |source /home/db2inst1/sqllib/db2profile
+
 
 Steps to start data collection
 * Create the user owning monitoring
@@ -85,6 +86,11 @@ Steps to start data collection
 * Create the schema
 * Decide on monitoring query or use preconfigured
 * Start the job, either as crontab job or DB2 scheduled task
+
+## Create user owning moniring
+* Create local linux/AD user, for instance bigsqlmn
+* source db2 profile, add to .bashrc : source /home/db2inst1/sqllib/db2profile
+
 
 ## Schema creation
 
